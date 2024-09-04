@@ -1,0 +1,49 @@
+             DAXs for Project
+% diff in Rating = DIVIDE ([customer rating count]-[customer rating count LY],[customer rating count LY]) 
+
+Cost LY = CALCULATE([Total Cost],DATEADD('Calendar table'[Date],-1,YEAR))
+
+customer rating count = COUNTX('Sales Data','Sales Data'[Customer Rating])
+
+customer rating count LY = CALCULATE([customer rating count],SAMEPERIODLASTYEAR('Calendar table'[Date]))
+
+Diff in Cost = DIVIDE([Total Cost]-[Cost LY],[Cost LY])
+
+Diff in profit = DIVIDE([Total profit]-[Profit LY],[Profit LY])
+
+Diff in profit % = DIVIDE([profit %]-[Profit % LY],[Profit % LY])
+
+New customer = COUNTX(FILTER('Sales Data','Sales Data'[Customer Type]="New"),'Sales Data'[Customer Type])
+
+old customer = COUNTX(FILTER('Sales Data','Sales Data'[Customer Type]="Returning"),'Sales Data'[Customer Type])
+
+profit % = DIVIDE([Total profit],[Total Cost])
+
+Profit % LY = CALCULATE([profit %],
+DATEADD('Calendar table'[Date],-1,YEAR))
+
+Profit LY = CALCULATE([Total profit],
+DATEADD('Calendar table'[Date], -1,YEAR))
+
+Sales LY = CALCULATE([Total sales],
+DATEADD('Calendar table'[Date], -1,YEAR
+))
+
+target status = SWITCH(TRUE(),[Total sales]>[Total target sales],"Green","Red")
+
+        Total Cost = SUMX('Sales Data','Sales Data'[Cost Price])
+
+Total Customers = COUNTX('Sales Data','Sales Data'[Customer Type])
+
+
+Total profit = SUMX('Sales Data','Sales Data'[Profit/Loss])
+
+
+Total sales = SUMX('Sales Data','Sales Data'[Final Sales Price])
+
+Total sales color = SWITCH(TRUE(),[Total sales]>[Sales LY],"#00B050", "#C00000")
+
+
+Total target sales = AVERAGE('Sales Target'[Target])
+
+
